@@ -90,11 +90,19 @@ class CircularArray(object):
     def __init__(self):
         """Instantiate CircularArray."""
         self.head = None
-        self.array = []       
+        self.tail = None
+        # self.array = []       
+        self.array = {}
 
     def add_item(self, item):
         """Add item to array, at the end of the current rotation."""
-        self.array.append(item)
+        if self.head == None:
+            self.array[0] = item
+            self.head = 0
+        elif self.head = 0:
+            self.array[self.tail + 1] = item
+        else:
+            for i in range(length(self.array),self.head,:
 
     def get_by_index(self, index):
         """Return the data at a particular index."""
