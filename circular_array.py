@@ -22,12 +22,12 @@ However, the last item circles back around to the first item,
 so you can also rotate the list and shift the indexes. Positive
 numbers rotate the list start to the right (or higher indexes)::
 
-    >>> circ = CircularArray()
-    >>> circ.add_item('harry')
-    >>> circ.add_item('hermione')
-    >>> circ.add_item('ginny')
-    >>> circ.add_item('ron')
-    >>> circ.rotate(1)
+>>> circ = CircularArray()
+>>> circ.add_item('harry')
+>>> circ.add_item('hermione')
+>>> circ.add_item('ginny')
+>>> circ.add_item('ron')
+>>> circ.rotate(1)
     >>> circ.print_array()
     hermione
     ginny
@@ -90,27 +90,21 @@ class CircularArray(object):
     def __init__(self):
         """Instantiate CircularArray."""
         self.head = None
-        self.tail = None
         # self.array = []       
         self.array = {}
 
     def add_item(self, item):
-        """Add item to array, at the end of the current rotation."""
-        if self.head == None:
-            self.array[0] = item
-            self.head = 0
-        elif self.head = 0:
-            self.array[self.tail + 1] = item
-        else:
-            for i in range(length(self.array),self.head,:
+        """Add item to array, at the end of the current rotation."""    
+        self.array[len(self.array)] = item
+        
 
     def get_by_index(self, index):
         """Return the data at a particular index."""
-        try:
-            return self.array[index]
-        except:
-            return None
-
+        # try:
+        #     return self.array[index]
+        # except:
+        #     return None
+        return self.array.get(index,None)
     def rotate(self, increment):
         """Rotate array, positive for right, negative for left.
 
@@ -120,19 +114,29 @@ class CircularArray(object):
         length = len(self.array)
 
         increment =  increment % length
-        self.array = self.array[increment:] + self.array[:increment]
+        # self.array = self.array[increment:] + self.array[:increment]
+        new_array = {}
+        for i in range(length):
+            if i + increment < length:
+                new_array[i] = self.array[i+increment]
+                # print(new_array)
+            else:
+                new_array[i] = self.array[i + increment - length]
+        # print(new_array)
+        self.array = new_array
 
     def print_array(self):
         """Print the circular array items in order, one per line"""
-        for i in self.array:
-            print(i)
+        for i in range(len(self.array)):
+            print(self.array[i])
 
 l = ["a","b","c","d","e"]
-circ =  CircularArray()
+circ1 =  CircularArray()
 for char in l:
-    circ.add_item(char)
+    circ1.add_item(char)
 
-circ.array
+circ1.array
+
 if __name__ == "__main__":
     print()
     import doctest
